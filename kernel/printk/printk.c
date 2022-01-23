@@ -824,7 +824,9 @@ static ssize_t devkmsg_write(struct kiocb *iocb, struct iov_iter *from)
 			len -= endp - line;
 			line = endp;
 			/* QG-D */
-			if (strstr(line, "healthd"))
+			if (strstr(line, "healthd") ||
+				strncmp(line, "loop19: rw=0", sizeof("loop19: rw=0")) ||
+				strncmp(line, "attempt to access", sizeof("attempt to access")))
 				goto free;
 		}
 	}
